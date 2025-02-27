@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO Metadata -->
     <title>AImpacto Text-to-Speech - Free TTS Generator</title>
+<link rel="icon" type="image/png" sizes="512x512" href="/static/logo2.png">
     <meta name="description" content="Generate high-quality speech with AImpacto Kokoro-82M Text-to-Speech. Free, easy-to-use TTS with voices like Heart, Alloy, and more. Try it now!">
     <meta name="keywords" content="AImpacto, Kokoro-82M, text-to-speech, TTS, free TTS generator, voice synthesis, speech generator, AI voices">
     <meta name="robots" content="index, follow">
@@ -47,8 +48,37 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Tab Styling */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .tab.active {
+            background: var(--accent-color);
+            border-color: var(--border-color);
+        }
+
+        .tab:hover {
+            background: var(--hover-glow);
         }
 
         .container {
@@ -58,20 +88,30 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 1rem;
             animation: fadeIn 0.5s ease;
+            max-width: 600px;
+            margin: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .container.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
             font-size: clamp(1.5rem, 5vw, 2rem);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
         textarea, select, button {
             width: 100%;
-            max-width: 500px;
-            padding: 1rem;
+            max-width: 400px;
+            padding: 0.75rem;
             font-size: clamp(14px, 4vw, 16px);
             border-radius: 12px;
             border: 2px solid var(--border-color);
@@ -80,7 +120,6 @@
             margin-top: 0.5rem;
             outline: none;
             transition: all 0.3s ease;
-            font-family: 'Atkinson Hyperlegible Mono', monospace;
             animation: fadeIn 0.5s ease;
         }
 
@@ -115,7 +154,7 @@
 
         .settings {
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             margin-top: 1rem;
             padding: 1rem;
             background: rgba(255, 255, 255, 0.05);
@@ -206,7 +245,7 @@
 
         .custom-audio-player {
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             margin-top: 1rem;
             display: flex;
             align-items: center;
@@ -307,10 +346,19 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 style="display: none;">Kokoro-82M Text-to-Speech</h1> <!-- Hidden for SEO, no visual change -->
+    <div class="tabs">
+        <div class="tab" onclick="showTab('about')">About Us</div>
+        <div class="tab" onclick="showTab('tts')">TTS</div>
+    </div>
+
+    <div class="container active" id="about">
+        <h2>About Us</h2>
+        <p>Welcome to AImpacto, your go-to platform for high-quality text-to-speech generation. Our mission is to provide users with an easy-to-use tool that transforms text into lifelike speech using advanced AI technology. Whether you're creating content, enhancing accessibility, or just having fun, AImpacto is here to help!</p>
+        <p>Explore our various voice options and experience the future of voice synthesis. Thank you for choosing AImpacto!</p>
+    </div>
+
+    <div class="container hidden" id="tts">
         <h2><span style="color: white;">We use</span><br>Kokoro-82M Text-to-Speech</h2>
-        <p style="display: none;">Convert your text into lifelike speech with our free TTS generator. Choose from voices like Heart, Alloy, Bella, and more!</p> <!-- Hidden for SEO -->
         <textarea id="textInput" rows="4" placeholder="Enter text here..." aria-label="Text input for speech generation"></textarea>
         <select id="voiceSelect" aria-label="Select voice for text-to-speech">
             <option value="af_heart" selected>Heart (Default)</option>
@@ -356,7 +404,30 @@
         window.onload = function() {
             document.getElementById("darkMode").checked = !document.body.classList.contains("light-mode");
             document.getElementById("soundEffects").checked = soundEffectsEnabled;
+            showTab('about'); // Set "About Us" as the default tab
         };
+
+        function showTab(tab) {
+            const ttsContainer = document.getElementById("tts");
+            const aboutContainer = document.getElementById("about");
+            const tabs = document.querySelectorAll(".tab");
+
+            if (tab === 'tts') {
+                ttsContainer.classList.remove("hidden");
+                aboutContainer.classList.add("hidden");
+                tabs[0].classList.remove("active");
+                tabs[1].classList.add("active");
+                ttsContainer.classList.add("active");
+                aboutContainer.classList.remove("active");
+            } else {
+                aboutContainer.classList.remove("hidden");
+                ttsContainer.classList.add("hidden");
+                tabs[1].classList.remove("active");
+                tabs[0].classList.add("active");
+                aboutContainer.classList.add("active");
+                ttsContainer.classList.remove("active");
+            }
+        }
 
         function generateSpeech() {
             const text = document.getElementById("textInput").value.trim();

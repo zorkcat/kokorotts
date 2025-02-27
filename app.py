@@ -4,13 +4,13 @@ import soundfile as sf
 import os
 from io import BytesIO
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")  # Explicitly set template folder
 
 # Initialize the Kokoro TTS pipeline
 pipeline = KPipeline(lang_code='a')  # 'a' = American English, adjust as needed
 
-# Serve the frontend
-@app.route('/')
+# Serve the frontend (root route)
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
@@ -45,6 +45,10 @@ def generate_tts():
         as_attachment=False,
         download_name="output.wav"
     )
+
+# Vercel expects a handler for serverless functions
+def handler(request):
+    return app(request.environ, {})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Metadata -->
+    <title>Kokoro-82M Text-to-Speech - Free TTS Generator</title>
+    <meta name="description" content="Generate high-quality speech with Kokoro-82M Text-to-Speech. Free, easy-to-use TTS with voices like Heart, Alloy, and more. Try it now!">
+    <meta name="keywords" content="Kokoro-82M, text-to-speech, TTS, free TTS generator, voice synthesis, speech generator, AI voices">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Your Name or Organization">
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Kokoro-82M Text-to-Speech - Free TTS Generator">
+    <meta property="og:description" content="Create realistic speech with Kokoro-82M TTS. Free tool with voices like Heart, Alloy, and Bella. Generate and download now!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-project.vercel.app">
+    <meta property="og:image" content="https://your-project.vercel.app/og-image.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kokoro-82M Text-to-Speech - Free TTS Generator">
+    <meta name="twitter:description" content="Free Kokoro-82M TTS tool for generating lifelike speech. Multiple voices available. Start now!">
+    <meta name="twitter:image" content="https://your-project.vercel.app/og-image.jpg">
+    <!-- Preload Key Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono&display=swap" rel="stylesheet">
+    <!-- Favicon (optional but recommended) -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #925fff;
+            --hover-glow: rgba(146, 95, 255, 0.5);
+            --border-color: rgba(146, 95, 255, 0.5);
+        }
+        body.light-mode {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --accent-color: #466eff;
+            --hover-glow: rgba(74, 156, 255, 0.5);
+            --border-color: rgba(78, 175, 255, 0.2);
+        }
+        body {
+            font-family: 'Atkinson Hyperlegible Mono', monospace;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        textarea, select, button {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
+            font-size: clamp(14px, 4vw, 16px);
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Atkinson Hyperlegible Mono', monospace;
+            animation: fadeIn 0.5s ease;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        select {
+            padding: 0.75rem;
+        }
+
+        select option {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        button {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            box-shadow: 0 0 10px var(--hover-glow);
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .settings {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .settings.hidden {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .settings-header h3 {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            color: var(--accent-color);
+        }
+
+        .settings-item {
+            margin-bottom: 1rem;
+        }
+
+        .settings-item label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: clamp(12px, 3.5vw, 14px);
+        }
+
+        .settings-item input[type="checkbox"] {
+            appearance: none; /* Standard property */
+            -webkit-appearance: none; /* Webkit prefix */
+            -moz-appearance: none; /* Mozilla prefix */
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .settings-item input[type="checkbox"]:checked {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .settings-item input[type="checkbox"]:checked::after {
+            content: '✔';
+            color: var(--text-color);
+            font-size: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .toggle-settings {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            width: 3rem;
+            height: 3rem;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--text-color);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .toggle-settings:hover {
+            box-shadow: 0 0 10px var(--hover-glow);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-audio-player {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .custom-audio-player button {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            cursor: pointer;
+            padding: 0.5rem;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .custom-audio-player button:hover {
+            color: var(--text-color);
+        }
+
+        .custom-audio-player input[type="range"] {
+            flex: 1;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            height: 8px;
+            background: transparent;
+            appearance: none; /* Standard property */
+            -webkit-appearance: none; /* Webkit prefix */
+            -moz-appearance: none; /* Mozilla prefix */
+        }
+
+        .custom-audio-player input[type="range"]::-webkit-slider-runnable-track {
+            background: var(--border-color);
+            border-radius: 5px;
+            height: 5px;
+        }
+
+        .custom-audio-player input[type="range"]::-webkit-slider-thumb {
+            appearance: none; /* Standard property */
+            -webkit-appearance: none; /* Webkit prefix */
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -3px;
+            box-shadow: 0 0 5px var(--hover-glow);
+        }
+
+        .custom-audio-player input[type="range"]::-moz-range-track {
+            background: var(--border-color);
+            border-radius: 5px;
+            height: 5px;
+        }
+
+        .custom-audio-player input[type="range"]::-moz-range-thumb {
+            appearance: none; /* Standard property */
+            -moz-appearance: none; /* Mozilla prefix */
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--hover-glow);
+        }
+
+        .custom-audio-player .time-display {
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            color: var(--text-color);
+            margin: 0 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            textarea, select, button, .settings, .custom-audio-player {
+                max-width: 90vw;
+            }
+
+            .custom-audio-player {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .custom-audio-player input[type="range"] {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="display: none;">Kokoro-82M Text-to-Speech</h1> <!-- Hidden for SEO, no visual change -->
+        <h2><span style="color: white;">We use</span><br>Kokoro-82M Text-to-Speech</h2>
+        <p style="display: none;">Convert your text into lifelike speech with our free TTS generator. Choose from voices like Heart, Alloy, Bella, and more!</p> <!-- Hidden for SEO -->
+        <textarea id="textInput" rows="4" placeholder="Enter text here..." aria-label="Text input for speech generation"></textarea>
+        <select id="voiceSelect" aria-label="Select voice for text-to-speech">
+            <option value="af_heart" selected>Heart (Default)</option>
+            <option value="af_alloy">Alloy</option>
+            <option value="af_aoede">Aoede</option>
+            <option value="af_bella">Bella</option>
+            <option value="am_adam">Adam</option>
+            <option value="bm_daniel">Daniel</option>
+            <option value="bf_emma">Emma</option>
+        </select>
+        <button onclick="generateSpeech()">Generate Speech</button>
+        <button id="downloadButton" class="hidden" onclick="downloadAudio()">Download Audio</button>
+        <div id="customAudioPlayer" class="custom-audio-player hidden" role="region" aria-label="Audio player">
+            <button id="playPauseBtn" aria-label="Play or pause audio">▶️</button>
+            <input type="range" id="seekBar" value="0" max="100" aria-label="Seek audio position">
+            <span class="time-display" id="currentTime" aria-label="Current time">0:00</span> / <span class="time-display" id="duration" aria-label="Audio duration">0:00</span>
+            <button id="muteBtn" aria-label="Mute or unmute audio">🔊</button>
+        </div>
+        <div class="settings hidden" id="settingsSection" role="region" aria-label="Settings">
+            <div class="settings-header">
+                <h3>Settings</h3>
+            </div>
+            <div class="settings-item">
+                <label for="darkMode">Dark Mode</label>
+                <input type="checkbox" id="darkMode" onchange="toggleDarkMode()" checked aria-label="Toggle dark mode">
+            </div>
+            <div class="settings-item">
+                <label for="soundEffects">Sound Effects</label>
+                <input type="checkbox" id="soundEffects" checked onchange="toggleSoundEffects()" aria-label="Toggle sound effects">
+            </div>
+        </div>
+    </div>
+
+    <button class="toggle-settings" onclick="toggleSettings()" aria-label="Toggle settings">⚙️</button>
+
+    <script>
+        let soundEffectsEnabled = true;
+        let currentAudioURL = null;
+        let audio = new Audio();
+        let isPlaying = false;
+        let isMuted = false;
+
+        window.onload = function() {
+            document.getElementById("darkMode").checked = !document.body.classList.contains("light-mode");
+            document.getElementById("soundEffects").checked = soundEffectsEnabled;
+        };
+
+        function generateSpeech() {
+            const text = document.getElementById("textInput").value.trim();
+            const voice = document.getElementById("voiceSelect").value;
+            const customAudioPlayer = document.getElementById("customAudioPlayer");
+            const downloadButton = document.getElementById("downloadButton");
+
+            if (!text) {
+                alert("Please enter some text.");
+                return;
+            }
+
+            playClickSound();
+
+            fetch('/generate_tts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text, voice: voice })
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                if (currentAudioURL) URL.revokeObjectURL(currentAudioURL);
+                currentAudioURL = URL.createObjectURL(blob);
+                audio.src = currentAudioURL;
+                customAudioPlayer.classList.remove("hidden");
+                downloadButton.classList.remove("hidden");
+                audio.play();
+                isPlaying = true;
+                document.getElementById("playPauseBtn").textContent = "⏸️";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while generating the audio.");
+            });
+        }
+
+        function downloadAudio() {
+            if (currentAudioURL) {
+                const a = document.createElement("a");
+                a.href = currentAudioURL;
+                a.download = "generated_audio.wav";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                playClickSound();
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("light-mode");
+            playClickSound();
+        }
+
+        function toggleSoundEffects() {
+            soundEffectsEnabled = document.getElementById("soundEffects").checked;
+            playClickSound();
+        }
+
+        function toggleSettings() {
+            const settingsSection = document.getElementById("settingsSection");
+            settingsSection.classList.toggle("hidden");
+            playClickSound();
+        }
+
+        function playClickSound() {
+            if (soundEffectsEnabled) {
+                let clickAudio = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
+                clickAudio.volume = 0.3;
+                clickAudio.play().catch(error => console.log("Audio play failed:", error));
+            }
+        }
+
+        document.getElementById("playPauseBtn").addEventListener("click", function() {
+            if (isPlaying) {
+                audio.pause();
+                this.textContent = "▶️";
+            } else {
+                audio.play();
+                this.textContent = "⏸️";
+            }
+            isPlaying = !isPlaying;
+        });
+
+        document.getElementById("muteBtn").addEventListener("click", function() {
+            if (isMuted) {
+                audio.muted = false;
+                this.textContent = "🔊";
+            } else {
+                audio.muted = true;
+                this.textContent = "🔇";
+            }
+            isMuted = !isMuted;
+        });
+
+        audio.addEventListener("timeupdate", function() {
+            const seekBar = document.getElementById("seekBar");
+            const currentTime = document.getElementById("currentTime");
+            const duration = document.getElementById("duration");
+
+            seekBar.value = (audio.currentTime / audio.duration) * 100 || 0; // Handle NaN
+            currentTime.textContent = formatTime(audio.currentTime);
+            duration.textContent = formatTime(audio.duration || 0); // Handle undefined duration
+        });
+
+        document.getElementById("seekBar").addEventListener("input", function() {
+            const seekTime = (this.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+    </script>
+</body>
+</html>
